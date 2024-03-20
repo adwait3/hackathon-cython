@@ -1,0 +1,43 @@
+graph TD
+A[User Visits Website] --> B[Content Scripts Injected]
+B --> C[Read Session Parameters]
+D ---> H[Check Password against Leaked Database]
+
+subgraph Browser Extension Setup
+A
+B
+C
+D
+E
+F
+G
+end
+
+subgraph Reading Session Parameters
+C[Read Session Parameters] -->|cookie| D[Background Script]
+C -->|CSRF token| D[Background Script]
+end
+
+subgraph Posting Parameters to Server
+D[Background Script] --->|post parameters| E[Post Parameters to Server]
+end
+
+subgraph Modifying Hyperlink
+D[Background Script] --->|modify hyperlink| F[Modify Hyperlink]
+end
+
+subgraph Phishing Detection
+D[Background Script] --->|check for phishing| G[Check for Phishing]
+G --->|detect phishing| H[Alert User]
+H --->|return to safety| I[Redirect to Safe Page]
+end
+
+subgraph Password Checker
+D[Background Script] -->|check password| H[Check Password against Leaked Database]
+H -->|leaked password| J[Alert User]
+J -->|change password| K[Change Password]
+end
+
+subgraph Localization
+D[Background Script] -->|localize| L[Localization]
+end
