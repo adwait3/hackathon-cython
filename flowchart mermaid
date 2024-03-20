@@ -7,17 +7,12 @@ subgraph Browser Extension Setup
 A1 
 A
 B
-C
-D
-E
-F
-G
+C[Read Session Parameters] --->|cookie| D
+C -->|CSRF token| D[Background Script]
+D[Background Script]
+
 end
 
-subgraph Reading Session Parameters
-C[Read Session Parameters] --->|cookie| D[Background Script]
-C -->|CSRF token| D[Background Script]
-end
 
 subgraph Posting Parameters to Server
 D[Background Script] --->|post parameters| E[Post Parameters to Server]
@@ -28,7 +23,7 @@ D[Background Script] ---->|modify hyperlink| F[Modify Hyperlink]
 end
 
 subgraph Phishing Detection
-D[Background Script] ---->|check for phishing| G[Check for Phishing]
+A ------>|haveibeenpwned API| G[Check for Phishing]
 G ---->|detect phishing| H[Alert User]
 H --->|return to safety| I[Redirect to Safe Page]
 end
