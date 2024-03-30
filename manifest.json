@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Custom Extension",
+  "version": "1.0",
+  "description": "Read session parameters and modify hyperlinks",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://test.com/",
+    "https://test.com/"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
